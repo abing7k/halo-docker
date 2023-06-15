@@ -1,68 +1,44 @@
 server:
   port: 8090
-  forward-headers-strategy: framework
-  compression:
-    enabled: true
-  error:
-    whitelabel:
-        enabled: false
+
 spring:
   output:
     ansi:
-      enabled: detect
-  r2dbc:
-    url: r2dbc:pool:mysql://47.99.49.255:3307/blog
-    username: blog
-    password: hb742608.
-  sql:
-    init:
-      mode: always
-      platform: mysql
-  codec:
-    max-in-memory-size: 10MB
-  messages:
-    basename: config.i18n.messages
+      enabled: always
+  thymeleaf:
+    cache: false
   web:
     resources:
       cache:
         cachecontrol:
-          max-age: 365d
+          no-cache: true
+        use-last-modified: false
 
 halo:
-  work-dir: ${user.home}/.halo2
+  console:
+    proxy:
+      endpoint: http://localhost:3000/
+      enabled: true
+  security:
+    initializer:
+      super-admin-username: admin
+      super-admin-password: admin
   plugin:
-    plugins-root: ${halo.work-dir}/plugins
-  attachment:
-    resource-mappings:
-      - pathPattern: /upload/**
-        locations:
-          - migrate-from-1.x
-
+    runtime-mode: development # development, deployment
+  work-dir: ${user.home}/halo2-dev
+logging:
+  level:
+    run.halo.app: DEBUG
+    org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler: DEBUG
 springdoc:
   api-docs:
-    enabled: false
-  writer-with-order-by-keys: true
-
-logging:
-  file:
-    name: ${halo.work-dir}/logs/halo.log
-  logback:
-    rollingpolicy:
-      max-file-size: 10MB
-      total-size-cap: 1GB
-      max-history: 0
+    enabled: true
+  swagger-ui:
+    enabled: true
+  show-actuator: true
 
 management:
   endpoints:
     web:
       exposure:
-          include: ["health", "info", "startup", "globalinfo", "logfile"]
-  endpoint:
-    health:
-      probes:
-        enabled: true
-  info:
-    java:
-      enabled: true
-    os:
-      enabled: true
+        include: "*"
