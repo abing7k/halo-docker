@@ -5,4 +5,4 @@ FROM halohub/halo:2.6.1
 COPY application.yaml ./
 EXPOSE ${PORT}
 # ENTRYPOINT ["sh", "-c" ,"java ${JVM_OPTS} org.springframework.boot.loader.JarLauncher ${0} ${@}", "-Duser.timezone=$TZ", "--halo.security.initializer.superadminusername=admin",  "--halo.security.initializer.superadminpassword=P@88w0rd", "--spring.config.location=classpath:/application.yml,file:./application.yml"]
-CMD [ "--spring.config.location=classpath:/application.yaml,file:./application.yaml" ,"--halo.security.initializer.superadminusername=hanbing" ,"--halo.security.initializer.superadminpassword=Hb742608." ]
+CMD [ "--spring.config.location=classpath:/application.yaml,file:./application.yaml" ,"--halo.security.initializer.superadminusername=hanbing" ,"--halo.security.initializer.superadminpassword=Hb742608."]
